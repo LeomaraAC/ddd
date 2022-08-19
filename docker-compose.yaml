@@ -1,11 +1,18 @@
 version: '3.9'
 services:
-  app:
+  npm:
     image: 'node:16'
     container_name: app
     working_dir: /app
     volumes:
       - .:/app
-    command:
-      - bash
+    entrypoint: npm
     tty: true
+
+  test:
+    image: 'node:16'
+    container_name: test
+    working_dir: /app
+    volumes:
+      - .:/app
+    entrypoint: npm test
