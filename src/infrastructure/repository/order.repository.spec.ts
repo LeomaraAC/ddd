@@ -92,4 +92,23 @@ describe('Order repository test', () => {
         expect(foundOrders).toEqual([order1, order2]);
     });
 
+    it('should find one order by id', async () => {
+        const customer = await createCustomer('1');
+        const product = await createProduct('1');
+        const orderRepository = new OrderRepository();
+        const orderItem = new OrderItem('1', product.name, product.price, product.id, 1);
+        const order = new Order('1', customer.id, [orderItem]);
+        await orderRepository.create(order);
+
+        const foundOrder = await orderRepository.find(order.id);
+        expect(foundOrder).toStrictEqual(order);
+    });
+
+    it('should throw an error when order is not found', async () => {
+        const orderRepository = new OrderRepository();
+        await expect(async () => {
+            await orderRepository.find('1');
+        }).rejects.toThrow('Order not found');
+    });
+
 });
