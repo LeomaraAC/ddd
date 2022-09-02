@@ -71,4 +71,25 @@ describe('Order repository test', () => {
         });
     });
 
+    it('should find all orders', async () => {
+        const customer = await createCustomer('1');
+        const product1 = await createProduct('1');
+        const product2 = await createProduct('2');
+        const product3 = await createProduct('3');
+
+        const orderRepository = new OrderRepository();
+        const orderItem1 = new OrderItem('1', product1.name, product1.price, product1.id, 2);
+        const orderItem2 = new OrderItem('2', product2.name, product2.price, product2.id, 1);
+        const orderItem3 = new OrderItem('3', product3.name, product3.price, product3.id, 1);
+
+        const order1 = new Order('1', customer.id, [orderItem1, orderItem3]);
+        const order2 = new Order('2', customer.id, [orderItem2]);
+        await orderRepository.create(order1);
+        await orderRepository.create(order2);
+
+        const foundOrders = await orderRepository.findAll();
+
+        expect(foundOrders).toEqual([order1, order2]);
+    });
+
 });
