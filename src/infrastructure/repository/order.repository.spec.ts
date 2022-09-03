@@ -111,4 +111,33 @@ describe('Order repository test', () => {
         }).rejects.toThrow('Order not found');
     });
 
+    it('should update a order', async () => {
+        const customer = await createCustomer('1');
+        const product = await createProduct('1');
+        const product2 = await createProduct('2');
+        const orderRepository = new OrderRepository();
+        const orderItem = new OrderItem('1', product.name, product.price, product.id, 1);
+        const orderItem2 = new OrderItem('2', product2.name, product2.price, product2.id, 1);
+        const order = new Order('1', customer.id, [orderItem]);
+        await orderRepository.create(order);
+
+        order.addItem(orderItem2);
+        await orderRepository.update(order);
+
+        const orderModel = await OrderModel.findOne({where: {id: order.id}, include: ['items']});
+        expect(orderModel.toJSON()).toStrictEqual({
+            id: order.id,
+            customerId: customer.id,
+            total: order.total(),
+            items: order.items.map(item => ({
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                quantity: item.quantity,
+                productId: item.productId,
+                orderId: order.id
+            }))
+        });
+    });
+
 });

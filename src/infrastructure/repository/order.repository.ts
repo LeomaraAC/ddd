@@ -37,7 +37,16 @@ export default class OrderRepository implements OrderRepositoryInterface {
     }
 
     async update(entity: Order): Promise<void> {
-        //
+        await this.deleteOldItem(entity.id);
+        await OrderModel.update({total: entity.total()}, {where: {id: entity.id}});
+        await OrderItemModel.bulkCreate(entity.items.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            productId: item.productId,
+            quantity: item.quantity,
+            orderId: entity.id
+        })));
     }
 
     private getOrderFromModel(model: OrderModel) {
@@ -45,5 +54,9 @@ export default class OrderRepository implements OrderRepositoryInterface {
             new OrderItem(itemModel.id, itemModel.name, (itemModel.price / itemModel.quantity),
                 itemModel.productId, itemModel.quantity));
         return new Order(model.id, model.customerId, items);
+    }
+
+    private async deleteOldItem(orderId: string) {
+        await OrderItemModel.destroy({where: {orderId}});
     }
 }
