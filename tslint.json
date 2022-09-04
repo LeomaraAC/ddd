@@ -5,7 +5,8 @@
     ],
     "jsRules": {},
     "rules": {
-        "semicolon": [true, "always"]
+        "semicolon": [true, "always"],
+        "no-console": false
     },
     "rulesDirectory": []
 }
