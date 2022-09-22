@@ -1,6 +1,6 @@
-import EventDispatcher from "../../../@shared/event/event-dispatcher";
-import EnviaConsoleLogHandler from "./envia-console-log.handler";
-import AddressChangedEvent from "../address-changed.event";
+import EventDispatcher from '../../../@shared/event/event-dispatcher';
+import EnviaConsoleLogHandler from './envia-console-log.handler';
+import AddressChangedEvent from '../address-changed.event';
 
 describe('Enviar console log handler test', () => {
     it('should print console log when address is changed', () => {

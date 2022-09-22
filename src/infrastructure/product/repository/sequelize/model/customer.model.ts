@@ -1,7 +1,7 @@
-import {Column, Model, PrimaryKey, Table} from "sequelize-typescript";
+import {Column, Model, PrimaryKey, Table} from 'sequelize-typescript';
 
 @Table({
-    tableName: "customers",
+    tableName: 'customers',
     timestamps: false
 })
 export default class CustomerModel extends Model {

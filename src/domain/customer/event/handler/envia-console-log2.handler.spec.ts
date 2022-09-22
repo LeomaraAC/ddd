@@ -1,6 +1,6 @@
-import EventDispatcher from "../../../@shared/event/event-dispatcher";
-import CustomerCreatedEvent from "../customer-created.event";
-import EnviaConsoleLog2Handler from "./envia-console-log2.handler";
+import EventDispatcher from '../../../@shared/event/event-dispatcher';
+import CustomerCreatedEvent from '../customer-created.event';
+import EnviaConsoleLog2Handler from './envia-console-log2.handler';
 
 describe('Enviar console log 2 handler test', () => {
     it('should print console log when customer is created', () => {
