@@ -19,6 +19,10 @@ describe('Product use case integration test', () => {
         productRepository = new ProductRepository();
     });
 
+    afterEach(async () => {
+        await sequelize.close();
+    });
+
     it('should create a new product', async () => {
         const usecase = new CreateProductUsecase(productRepository);
         const output = await usecase.execute({name: 'Product 1', price: 1});
