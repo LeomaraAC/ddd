@@ -9,7 +9,7 @@ const mockRepository = () => ({
 });
 
 
-describe('Product use case unit test', () => {
+describe('Create product use case unit test', () => {
     it('should create a new product', async () => {
         const usecase = new CreateProductUsecase(mockRepository());
         const input: InputCreateProductDto = {name: 'Product 1', price: 1};

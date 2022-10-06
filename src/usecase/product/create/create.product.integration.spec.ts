@@ -3,7 +3,7 @@ import {Sequelize} from 'sequelize-typescript';
 import ProductRepository from '../../../infrastructure/product/repository/sequelize/product.repository';
 import ProductModel from '../../../infrastructure/customer/repository/sequelize/model/product.model';
 
-describe('Product use case integration test', () => {
+describe('Create product use case integration test', () => {
     let sequelize: Sequelize;
     let productRepository: ProductRepository;
 
