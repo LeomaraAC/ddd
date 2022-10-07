@@ -29,6 +29,6 @@ class OutputMapper {
                     zip: customer.Address.zip,
                 }
             }))
-        }
+        };
     }
 }
